@@ -1,0 +1,110 @@
+<!-- 
+-----------------------
+IDENTIFICAÇÃO DA EQUIPE
+-----------------------
+Turma: 013
+1. José Fagner Silva Junqueira
+2. Yasmin
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Trabalho 1 - PF 2022.1</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+</head>
+
+<body>
+    <h1>COMP0393 - PROGRAMAÇÃO FUNCIONAL</h1>
+    <h2>TRABALHO 1 - Texto codificado</h2>
+    <!-- ALTERAR NÚMERO DA TURMA -->
+    <h3>Turma 01</h3>
+    <h3>Equipe G</h3>
+    <ol>
+        <!-- ALTERAR NOMES DOS INTEGRANTES DA EQUIPE -->
+        <li>José Fagner Silva Junqueira</li>
+        <li>Yasmin</li>
+    </ol>
+    <hr>
+    <h2>Leitura do arquivo original</h2>
+    <input type="file" name="inputfile" id="inputfile" onchange="processa(this)">
+	<br>
+
+    <h2>Texto codificado</h2>
+	<pre id="output"></pre>
+    
+    <script type="text/javascript">
+        const processa = (elem) => {
+            const fr = new FileReader()
+            fr.readAsText(elem.files[0])
+            fr.onload = () => codifica(fr.result)
+        }
+        const codifica = (texto) => {
+
+            const alfabeto = [
+                {principal: 'a', valor: 10240},
+                {principal: 'b', valor: 22880},
+                {principal: 'c', valor: 30240},
+                {principal: 'd', valor: 44240},
+                {principal: 'e', valor: 50440},
+                {principal: 'f', valor: 66500},
+                {principal: 'g', valor: 88500},
+                {principal: 'h', valor: 24280},
+                {principal: 'i', valor: 24220},
+                {principal: 'j', valor: 24240},
+                {principal: 'k', valor: 44440},
+                {principal: 'l', valor: 24500},
+                {principal: 'm', valor: 24660},
+                {principal: 'n', valor: 24680},
+                {principal: 'o', valor: 24880},
+                {principal: 'p', valor: 24200},
+                {principal: 'q', valor: 64640},
+                {principal: 'r', valor: 26260},
+                {principal: 's', valor: 22240},
+                {principal: 't', valor: 50500},
+                {principal: 'u', valor: 88880},
+                {principal: 'v', valor: 30300},
+                {principal: 'x', valor: 40400},
+                {principal: 'w', valor: 22260},
+                {principal: 'y', valor: 28280},
+                {principal: 'z', valor: 22280},
+                {principal: ' ', valor: 11112},
+                {principal: '.', valor: 11113},
+                {principal: ',', valor: 11114},
+            ]
+
+            var textoFinal = ''
+            let textoSeparado = texto.split('')
+            var saida = textoSeparado.map(function(letra){
+                const letraFinal = alfabeto.map(function(letraAlfabeto){
+                    if(letra === letraAlfabeto.principal){
+                        textoFinal += String(letraAlfabeto.valor)
+                    } else if(letra === letraAlfabeto.principal.toUpperCase()){
+                        var maiusculo = letraAlfabeto.valor + 1
+                        textoFinal += String(maiusculo)
+                    }
+                })
+            });
+
+            const resultado = textoFinal 
+            document.getElementById('output').textContent = resultado  
+        }
+
+        
+
+
+        const decodifica = (textocodificado) => {
+           
+            var textoDecodificado = ''
+
+
+            const resultado = textocodificado //você deve substituir 'textocodificado' pelo resultado do seu processamento 
+        }
+        
+
+	</script>
+
+</body>
+
+</html>

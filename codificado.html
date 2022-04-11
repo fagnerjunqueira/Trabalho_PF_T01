@@ -31,8 +31,14 @@ Turma: 013
     <input type="file" name="inputfile" id="inputfile" onchange="processa(this)">
 	<br>
 
+    <h2>Texto original</h2>
+	<p id="original"></p>
+    <hr>
     <h2>Texto codificado</h2>
-	<pre id="output"></pre>
+	<p id="output"></p>
+    <hr>
+    <h2>Texto decodificado</h2>
+    <p id="decodificado"></p>
     
     <script type="text/javascript">
         const processa = (elem) => {
@@ -40,9 +46,8 @@ Turma: 013
             fr.readAsText(elem.files[0])
             fr.onload = () => codifica(fr.result)
         }
-        const codifica = (texto) => {
 
-            const alfabeto = [
+        const alfabeto = [
                 {principal: 'a', valor: 10240},
                 {principal: 'b', valor: 22880},
                 {principal: 'c', valor: 30240},
@@ -74,32 +79,43 @@ Turma: 013
                 {principal: ',', valor: 11114},
             ]
 
+        const codifica = (texto) => {
+            
+            document.getElementById('original').textContent = texto
             var textoFinal = ''
             let textoSeparado = texto.split('')
-            var saida = textoSeparado.map(function(letra){
-                const letraFinal = alfabeto.map(function(letraAlfabeto){
+            var saida = textoSeparado.map((letra) => {
+                const letraFinal = alfabeto.map((letraAlfabeto) => {
                     if(letra === letraAlfabeto.principal){
-                        textoFinal += String(letraAlfabeto.valor)
+                        textoFinal += String(letraAlfabeto.valor) + " "
                     } else if(letra === letraAlfabeto.principal.toUpperCase()){
                         var maiusculo = letraAlfabeto.valor + 1
-                        textoFinal += String(maiusculo)
+                        textoFinal += String(maiusculo) + " "
                     }
                 })
             });
 
-            const resultado = textoFinal 
+            const resultado = textoFinal
             document.getElementById('output').textContent = resultado  
+            decodifica(resultado)
         }
 
-        
-
-
         const decodifica = (textocodificado) => {
-           
-            var textoDecodificado = ''
 
+            var textoFinal = ''
+            var caracterSeparado = textocodificado.split(" ")
+            var saida = caracterSeparado.map((caracter) => {
+                var decodificacao = alfabeto.map((letraAlfabeto) => {
+                    if(caracter == letraAlfabeto.valor){
+                        textoFinal += letraAlfabeto.principal
+                    }else if(caracter == letraAlfabeto.valor+1){
+                        textoFinal += letraAlfabeto.principal.toUpperCase()
+                    }
+                })
+            })
 
-            const resultado = textocodificado //você deve substituir 'textocodificado' pelo resultado do seu processamento 
+            const resultado = textoFinal 
+            document.getElementById('decodificado').textContent = resultado
         }
         
 
